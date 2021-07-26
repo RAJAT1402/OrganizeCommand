@@ -12,13 +12,19 @@ function print(path1){
     
     let folderContent = fs.readdirSync(path1);                  //extracting contents in the given paths
 
-    let mainFolderPath = path.join(path1,"organize");           
-    fs.mkdirSync(mainFolderPath);                               //Creating organize folder
+    let mainFolderPath = path.join(path1,"organize");     
+    
+    if(fs.existsSync(mainFolderPath)){                         //checking if organize folder exists o not
+            console.log("organize folder already exists");
+            return ;
+    } else {
+            fs.mkdirSync(mainFolderPath);                      //Creating organize folder
+    }
+
 
     for(let i = 0 ; i < folderContent.length ; i++){            //loop on contents in folder
         let extension = path.extname(folderContent[i]);
         let ext = extension.split(".")[1];
-        
         let folderName = "other";
 
         for(key in types){                                      //loop on key in objects
