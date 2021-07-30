@@ -9,6 +9,8 @@
          // 2. node main.js organize "path"
          // 3. node main.js help
 
+let fs = require("fs");
+
 let helpObj = require("./Commands/help");           //requiring objects from help.js
 let treeObj = require("./Commands/tree");           //requiring objects from tree.js
 let organizeObj = require("./Commands/organize");   //requiring objects from organize.js
@@ -19,7 +21,13 @@ let command = inputArr[0];                          //getting which command we h
 if(inputArr[1] == undefined){                       //checking if path is given else giving current path
     path = process.cwd();
 }else {
-    path = inputArr[1];
+    let doesExist = fs.existsSync(inputArr[1]);                                 //checking if path exists or not
+    if(doesExist == true){
+        path = inputArr[1];
+    } else {
+        console.log("Wrong path pls rerun the command with corect path");
+        return;
+    }
 }
 
 

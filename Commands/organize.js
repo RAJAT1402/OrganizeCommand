@@ -23,9 +23,19 @@ function print(path1){
 
 
     for(let i = 0 ; i < folderContent.length ; i++){            //loop on contents in folder
+
+        let folderPath = path.join(path1,folderContent[i]);
+        let statsOfFile = fs.lstatSync(folderPath);
+        let isFile = statsOfFile.isDirectory();
+
+        if(isFile == true){                                     //checking if there is any folder exists or not
+            console.log("folder found");
+            continue;
+        }
+
         let extension = path.extname(folderContent[i]);
         let ext = extension.split(".")[1];
-        let folderName = "other";
+        let folderName = "other";                               
 
         for(key in types){                                      //loop on key in objects
             for(let j = 0 ; j < types[key].length ; j++){       //loop on array on each key in object
@@ -47,6 +57,8 @@ function print(path1){
         let srcPath = path.join(path1,folderContent[i]);                        //source path of copy file
         let destPath = path.join(mainFolderPath,folderName,folderContent[i]);   //destination path where file is to be copies
         fs.copyFileSync(srcPath,destPath);
+
+        console.log(folderContent[i]," copied to Organize -> ",folderName);
     }
 }
 
