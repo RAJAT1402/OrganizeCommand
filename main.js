@@ -30,7 +30,6 @@ if(inputArr[1] == undefined){                       //checking if path is given 
     }
 }
 
-
 //comparing which command we have to perform and calling that object
 if(command == "help"){
 
